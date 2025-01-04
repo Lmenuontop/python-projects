@@ -1,2 +1,3 @@
 # python-projects
-wow
+wow, github.
+"Assets" folder is for file "main.py"
