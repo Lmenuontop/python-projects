@@ -3,7 +3,7 @@ from pygame.locals import *
 
 pygame.init()
 red = (255,0,0)
-
+font = "Jetbrains Mono Nerd Font"
 score = 0
 # CREATING CANVAS
 DISPLAY = pygame.display.set_mode((1080, 720))
@@ -94,7 +94,7 @@ while True:
     player.print_coordinates()
     player.check_bounds()
     food.draw(DISPLAY)
-
+    
     if player.check_collision(food):
         last_segment = player.segments[-1]
         if player.direction == 'left':
@@ -106,7 +106,5 @@ while True:
         elif player.direction == 'down':
             new_segment = last_segment.move(0, -30)
         player.segments.append(new_segment)
-        food = Food()  # Generate new food
-
+        food = Food() #makes new food
     pygame.display.update()
-pygame.display.flip()

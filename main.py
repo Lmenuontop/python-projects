@@ -2,7 +2,8 @@ import pygame, sys, random
 from pygame.locals import *
 pygame.init()
 
-score = 0
+score = 1*1-1*0+1
+print(score)
 clock = pygame.time.Clock()
 # CREATING CANVAS
 DISPLAY = pygame.display.set_mode((1080, 720))
@@ -17,6 +18,7 @@ enemy = pygame.image.load('Assets/enemy.png')
 bullet = pygame.image.load('Assets/Bullet.png')
 x_position = 1080 / 2 - 32/2
 y_position = 720 / 2 - 32/2
+
 
 random_x_position = random.randint(0,100)
 random_y_position = random.randint(-64, -25)
@@ -40,7 +42,7 @@ while True:
     
     for event in pygame.event.get():
         if event.type==QUIT:
-            
+            print("Bye")            
             pygame.quit()
             sys.exit()
             
@@ -66,7 +68,6 @@ while True:
     if random_y_position > 344:
         score = 0
         print(score)
-        
     if random_y_position > 344:
         random_x_position = random.randint(0,1000)
         random_y_position = random.randint(-64, -25) 
@@ -110,4 +111,4 @@ while True:
 
 
 
-
+print("Vim pycgarm edition")

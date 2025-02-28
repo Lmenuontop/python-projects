@@ -1,16 +1,17 @@
 import random
-ng = 0
-Num = random.randint(0,100)
-guess = int(input("Put your first guess here: "))
-while guess != Num:
-    if guess < Num:
+num = random.randint(1, 100)
+ng = 1
+guess = int(input("put a guess: "))
+while guess != num:
+    if guess < num:
         print("bigger")
-        guess = int(input("Put another guess: "))
-        ng+=1
-    elif guess > Num:
+        guess = int(input("put a guess: "))
+        ng = ng+1
+    elif guess > num:
         print("smaller")
-        guess = int(input("Put another guess: "))
-        ng+=1
-if guess == Num:
-    print("thats right")
-    print("the number of guesses you took: ", ng+1)
+        guess = int(input("Put a guess: "))
+        ng = ng+1
+if num == guess:
+    print("you're right, took ", ng, " guess(es)")
+
+#### Hello vim is cool watchqdjfijfkfwdjfijfkfwq
