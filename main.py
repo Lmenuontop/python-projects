@@ -10,7 +10,7 @@ clock = pygame.time.Clock()
 DISPLAY = pygame.display.set_mode((1080, 720))
 
 # TITLE OF CANVAS
-pygame.display.set_caption("Game(WIP)")
+pygame.display.set_caption("Game, but low quality")
 
 WHITE = (255, 255, 255)
 
@@ -37,7 +37,7 @@ def spawn_bullet():
 print("TAP SPACE TO SHOOT BULLET")
 print("THE NUMBERS ARE YOUR SCORE, YOU START WITH 1")
 print("IF YOUR SCORE BECOMES ZERO, YOU LOSE")
-
+dev_mode = input("Do you want dev mode?(y/n): ")
 while True:
     
     clock.tick(60)
@@ -75,17 +75,18 @@ while True:
         x_position = 1044   
     
     random_y_position = random_y_position + 1
-
+    if keys[pygame.K_KP1] and dev_mode == "y":
+        random_y_position = random_y_position + 5
     DISPLAY.fill(WHITE)
     DISPLAY.blit(Player, (x_position, y_position))
     DISPLAY.blit(enemy, (random_x_position, random_y_position))
     spawn_enemy()
 #debug
-    if keys[pygame.K_ASTERISK]:
+    if dev_mode == "y" and keys[pygame.K_KP2]:
         print(x_position)
         print(y_position)
 #debug
-    if keys[pygame.K_CAPSLOCK]:
+    if keys[pygame.K_KP3] and dev_mode == "y":
         x_position = 0
         y_position = 0
 
@@ -108,7 +109,7 @@ while True:
             score += 1
             random_x_position = random.randint(0, 1000)
             random_y_position = random.randint(-64, -25)
-            bullet_fired = False
+            bullet_fired = False            
             print(score)
     
     pygame.display.update()
