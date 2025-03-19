@@ -1,4 +1,5 @@
-import pygame, sys
+import pygame
+import sys
 from pygame import *
 pygame.init()
 
@@ -132,5 +133,5 @@ if s1 > 0 and s2 > 0:
     # Blit images to the screen
     for button_image, x, y in buttons:
         DISPLAY.blit(button_image, (x, y))
-
+print("")
     pygame.display.update()  # Update the display

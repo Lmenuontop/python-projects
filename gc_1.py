@@ -1,9 +1,8 @@
 import pygame
 import sys
 from pygame.locals import *
-button_image = ""
-print("")
 pygame.init()
+button_image = ""
 pygame.display.set_caption("WIP visual calculator")
 white = (255, 255, 255)
 DISPLAY = pygame.display.set_mode((250, 250))
@@ -22,10 +21,11 @@ zero = pygame.image.load("Assets/zero.png")
 equal = pygame.image.load("Assets/equal.png")
 multiply = pygame.image.load("Assets/multiply.png")
 divide = pygame.image.load("Assets/divide.png")
-
-first_str = "." 
+first_str = "."
+second_str = "."
 mouse_y = 0
 mouse_x = 0
+
 button_spacing = 50
 buttons = [
     (one, 0, 0),
@@ -53,9 +53,7 @@ second_value = ""
 def button_clicked(x, y, button_rect):
     return button_rect.collidepoint(x, y)
 
-
-print("You tomato")
-
+print("tomato")
 while True:
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -145,10 +143,42 @@ while True:
                     elif button_image == zero:
                         first_str = ""
                         first_str = "0"
+                    if button_image == one:
+                        second_str= ""
+                        second_str = "1"
+                    elif button_image == two:
+                        second_str = ""
+                        second_str = "2"
+                    elif button_image == three:
+                        second_str = ""
+                        second_str = "3"
+                    elif button_image == four:
+                        second_str = ""
+                        second_str = "4"
+                    elif button_image == five:
+                        second_str = ""
+                        second_str = "5"
+                    elif button_image == six:
+                        second_str = ""
+                        second_str = "6"
+                    elif button_image == seven:
+                        second_str = ""
+                        second_str = "7"
+                    elif button_image == eight:
+                        second_str = ""
+                        second_str = "8"
+                    elif button_image == nine:
+                        second_str = ""
+                        second_str = "9"
+                    elif button_image == zero:
+                        second_str = ""
+                        second_str = "0"
 
-                print("First str????: ", first_str)
-                print("  ")
-    # Blit images to screen with reduced spacing chatgpt comment
+                    print("first: ",first_str, " second: ",second_str)
+                    ##You could concatonate firststr, operator and second str and be faster instead of typing every possibility
+                    if first_str == "1" and second_str = "1" and current_operation = "add":
+                
+# Blit images to screen with reduced spacing chatgpt comment
     DISPLAY.fill(white)
     DISPLAY.blit(one, (0, 0))
     DISPLAY.blit(two, (button_spacing, 0))

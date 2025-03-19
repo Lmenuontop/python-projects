@@ -3,7 +3,6 @@ from pygame.locals import *
 
 pygame.init()
 red = (255,0,0)
-font = "Jetbrains Mono Nerd Font"
 score = 0
 # CREATING CANVAS
 DISPLAY = pygame.display.set_mode((1080, 720))
