@@ -176,8 +176,7 @@ while True:
 
                     print("first: ",first_str, " second: ",second_str)
                     ##You could concatonate firststr, operator and second str and be faster instead of typing every possibility
-                    if first_str == "1" and second_str = "1" and current_operation = "add":
-                
+                    ##IDK HOW TO DO THAT 
 # Blit images to screen with reduced spacing chatgpt comment
     DISPLAY.fill(white)
     DISPLAY.blit(one, (0, 0))

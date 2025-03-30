@@ -6,6 +6,7 @@ from pygame.locals import *
 pygame.init()
 
 # Define global variables
+WHITE = (255, 255, 255)
 DISPLAY = None
 player_x = None
 player_y = None
@@ -31,7 +32,17 @@ def add_default_movement(asset_to_move_x_pos, asset_to_move_y_pos):
     elif keys[K_RIGHT]:
         asset_to_move_x_pos += 1
     return asset_to_move_x_pos, asset_to_move_y_pos
-
+def add_custom_movement(asset_to_move_x_pos, asset_to_move_y_pos, key_up, key_down, key_left, key_right):
+    keys = pygame.key.get_pressed()
+    if keys[key_up]:
+        asset_to_move_y_pos -= 1
+    elif keys[key_down]:
+        asset_to_move_y_pos += 1
+    elif keys[key_left]:
+        asset_to_move_x_pos -= 1
+    elif keys[key_right]:
+        asset_to_move_x_pos += 1
+    return asset_to_move_x_pos, asset_to_move_y_pos
 def draw_sprite(asset_name_draw, x_draw, y_draw):
     DISPLAY.blit(asset_name_draw, (x_draw, y_draw))
 
@@ -53,11 +64,18 @@ def sprite_collision(player_x, player_y, enemy_x, enemy_y):
         previous_x, previous_y = player_x - 1, player_y - 1
         player_x = previous_x
         player_y = previous_y
+        if player_x < previous_x:
+            player_x = player_x + 1
+        elif player_x > previous_x:
+            player_x = player_x - 1
+        if player_y < previous_y:
+            player_y = player_y + 1
+        elif player_y > previous_y:
+            player_y = player_y - 1
         return True, player_x, player_y
     else:
         return False, player_x, player_y
-## Use for debugging. See below for examples
-
+#Use for debugging. examples below
 def devmode(TF):
     if TF == True:
         print("Using devmode")
@@ -65,9 +83,28 @@ def devmode(TF):
         print("Not using dev mode")
 def random_number(lower_range, upper_range):
     randnum = random.randint(lower_range, upper_range)
-    print(randnum)
     return randnum
+def enemy_ai_movement(enemy_x, enemy_y, player_x, player_y, speed):
+    """
+    Moves the enemy towards the player.
+    :param enemy_x: Enemy's current x position.
+    :param enemy_y: Enemy's current y position.
+    :param player_x: Player's current x position.
+    :param player_y: Player's current y position.
+    :param speed: Speed of the enemy.
+    :return: Updated enemy_x, enemy_y positions.
+    """
+    if enemy_x < player_x:
+        enemy_x += speed
+    elif enemy_x > player_x:
+        enemy_x -= speed
 
+    if enemy_y < player_y:
+        enemy_y += speed
+    elif enemy_y > player_y:
+        enemy_y -= speed
+
+    return enemy_x, enemy_y
 #test engine before merging
 ## collision is cooked
 create_display(1080, 920)
@@ -88,8 +125,8 @@ running = True
 while running:
     for event in pygame.event.get():
         if event.type == QUIT:
-            running = False
-            print("Bye")
+            running= False
+            print("process exited")
     #enable devmode
     devmode(True)
     # Update the sprite's position based on keyboard input
@@ -99,9 +136,9 @@ while running:
     # Check for sprite collision
     collision_detected, player_x, player_y = sprite_collision(player_x, player_y, enemy_x, enemy_y)
     ##COMMENTING THIS LINE MAKE SOME STUPID THING HAPPEN???
-    DISPLAY.fill((255, 255, 255))  # White background
-
+    DISPLAY.fill(WHITE)  # White background
     # Draw the player and enemy sprites
+
     draw_sprite(player_sprite, player_x, player_y)
     draw_sprite(enemy_sprite, enemy_x, enemy_y)
     # Update the display
@@ -110,6 +147,9 @@ while running:
         player_x = player_x + 10
         player_y = player_y + 10
     random_number(1, 100)
+    enemy_ai_movement(enemy_x, enemy_y, player_x, player_y, 1)
+    draw_sprite(player_sprite, player_x, player_y)
+
 #Quit pygame n stuff
 pygame.quit()
 sys.exit()

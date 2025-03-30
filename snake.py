@@ -16,37 +16,37 @@ class Player(object):
         self.direction = "right"
         self.segments = [self.rect]
         self.initial_segments = 3
-        for y in range(1, self.initial_segments): 
-            new_segment = pygame.rect.Rect(self.segments[-1].topleft, (30, 30)) 
+        for y in range(1, self.initial_segments):
+            new_segment = pygame.rect.Rect(self.segments[-1].topleft, (30, 30))
             self.segments.append(new_segment)
 
-    def handle_keys(self): 
-        key = pygame.key.get_pressed() 
-        if key[pygame.K_LEFT]: 
-            self.direction = 'left' 
+    def handle_keys(self):
+        key = pygame.key.get_pressed()
+        if key[pygame.K_LEFT]:
+            self.direction = 'left'
         elif key[pygame.K_RIGHT]:
-            self.direction = 'right' 
-        elif key[pygame.K_UP]: 
-            self.direction = 'up' 
-        elif key[pygame.K_DOWN]: 
-            self.direction = 'down' 
+            self.direction = 'right'
+        elif key[pygame.K_UP]:
+            self.direction = 'up'
+        elif key[pygame.K_DOWN]:
+            self.direction = 'down'
         dist = 10  # Moved distance to align with segment size
         new_head = self.rect.copy()
-        
-        if self.direction == 'left': 
-            new_head = self.rect.move(-dist, 0) 
-        elif self.direction == 'right': 
-            new_head = self.rect.move(dist, 0) 
-        elif self.direction == 'up': 
-            new_head = self.rect.move(0, -dist) 
-        elif self.direction == 'down': 
+
+        if self.direction == 'left':
+            new_head = self.rect.move(-dist, 0)
+        elif self.direction == 'right':
+            new_head = self.rect.move(dist, 0)
+        elif self.direction == 'up':
+            new_head = self.rect.move(0, -dist)
+        elif self.direction == 'down':
             new_head = self.rect.move(0, dist)
 
-        self.segments = [new_head] + self.segments[:-1] 
+        self.segments = [new_head] + self.segments[:-1]
         self.rect = new_head
 
-    def draw(self, surface): 
-        for segment in self.segments: 
+    def draw(self, surface):
+        for segment in self.segments:
             pygame.draw.rect(surface, (0, 0, 128), segment)
 
     def check_bounds(self):
@@ -55,13 +55,13 @@ class Player(object):
             self.rect.center = (display_width // 2, display_height // 2)
             self.segments = [self.rect]
 
-    def print_coordinates(self): 
+    def print_coordinates(self):
         print("Top left:", self.rect.topleft)
         print("Top right:", self.rect.topright)
         print("Bottom left:", self.rect.bottomleft)
-        print("Bottom right:", self.rect.bottomright) 
+        print("Bottom right:", self.rect.bottomright)
         print("Center:", self.rect.center)
-        
+
     def check_collision(self, food):
         if self.rect.colliderect(food.rect):
             return True
@@ -93,7 +93,7 @@ while True:
     player.print_coordinates()
     player.check_bounds()
     food.draw(DISPLAY)
-    
+
     if player.check_collision(food):
         last_segment = player.segments[-1]
         if player.direction == 'left':

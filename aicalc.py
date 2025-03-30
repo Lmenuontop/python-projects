@@ -21,7 +21,7 @@ eight = pygame.image.load('Assets/eight.png')
 nine = pygame.image.load('Assets/nine.png')
 zero = pygame.image.load('Assets/zero.png')
 equal = pygame.image.load('Assets/equal.png')
-
+divide = None #no divide button yet
 button_spacing = 50
 
 # Define the positions and sizes of buttons (x, y, width, height)
@@ -37,8 +37,8 @@ buttons = [
 input_str = ""  # This will store the current input string
 current_operation = None  # Store the current operation (+ or -)
 first_value = None  # Store the first value before the operation
-s1 = int(input("addition idk: "))
-s2 = int(input("addition v2: "))
+# s1 = int(input("addition idk: "))
+# s2 = int(input("addition v2: "))
 # Function to check if a mouse click is inside a button
 def button_clicked(x, y, button_rect):
     return button_rect.collidepoint(x, y)
@@ -62,7 +62,7 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
-        
+
         if event.type == MOUSEBUTTONDOWN:  # Check for mouse click
             mouse_x, mouse_y = event.pos  # Get mouse position
 
@@ -71,7 +71,7 @@ while True:
                 button_rect = pygame.Rect(x, y, button_image.get_width(), button_image.get_height())
                 if button_clicked(mouse_x, mouse_y, button_rect):
                     print(f"Button clicked at position ({x}, {y})")
-                    
+
                     # Handle number buttons
                     if button_image == one:
                         input_str += "1"
@@ -93,7 +93,7 @@ while True:
                         input_str += "9"
                     elif button_image == zero:
                         input_str += "0"
-                    
+
                     # Handle operators
                     elif button_image == add:
                         if first_value is None:
@@ -105,7 +105,7 @@ while True:
                             first_value = float(input_str) if input_str else 0
                         current_operation = "-"
                         input_str = ""  # Clear input for the next number
-                    
+
                     # Handle equal button
                     elif button_image == equal:
                         if first_value is not None and input_str != "":
@@ -133,5 +133,4 @@ if s1 > 0 and s2 > 0:
     # Blit images to the screen
     for button_image, x, y in buttons:
         DISPLAY.blit(button_image, (x, y))
-print("")
     pygame.display.update()  # Update the display

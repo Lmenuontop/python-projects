@@ -1,8 +1,9 @@
-def rev(str1):
-	rstr = ""
-	i = len(str1)
-	while i > 0:
-		rstr += str1[i - 1]
-		i = i - 1
-	return rstr
-print(rev("cow"))
+#TODO Fix this
+def multiply(numbers):
+    result = 1
+    for number in numbers:
+        result*=number
+    return result
+usernums = input("Put numbers separated by a comma: ")
+usernums = [int(num) for num in usernums.split(",")]
+print(multiply(usernums))
